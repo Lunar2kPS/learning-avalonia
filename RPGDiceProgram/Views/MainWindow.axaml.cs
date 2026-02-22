@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace FileSearchProgram.Views {
+namespace RPGDiceProgram.Views {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();

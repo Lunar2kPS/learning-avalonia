@@ -2,9 +2,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using FileSearchProgram.ViewModels;
+using RPGDiceProgram.ViewModels;
 
-namespace FileSearchProgram {
+namespace RPGDiceProgram {
     /// <summary>
     /// Given a view model, returns the corresponding view if possible.
     /// </summary>

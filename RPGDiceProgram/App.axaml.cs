@@ -4,10 +4,10 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using FileSearchProgram.ViewModels;
-using FileSearchProgram.Views;
+using RPGDiceProgram.ViewModels;
+using RPGDiceProgram.Views;
 
-namespace FileSearchProgram
+namespace RPGDiceProgram
 {
     public partial class App : Application
     {
