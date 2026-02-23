@@ -30,12 +30,17 @@ namespace RPGDiceProgram.ViewModels {
 
         public string DisplayResult {
             get {
-                return DiceCount + DiceType.ToString().ToLower() + " + " + AbilityModifier;
+                return DiceCount + DiceType.ToString().ToLower() + " + " + AbilityModifier + "\n"
+                    + GetMin() + " - " + GetMax();
             }
         }
 
         public RPGDiceRollParamsVM(RPGDiceRollParams target) {
             this.target = target;
         }
+
+        public int GetMin() => target.GetMin();
+        public int GetMax() => target.GetMax();
+        public RPGDiceRollResults Roll() => target.Roll();
     }
 }
