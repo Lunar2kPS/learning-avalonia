@@ -3,11 +3,16 @@
         xmlns:vm="using:RPGDiceProgram.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
         x:Class="RPGDiceProgram.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        Width="500"
+        Height="320"
+        FontFamily="Tw Cen MT"
+        FontSize="18"
+
         Icon="/Assets/avalonia-logo.ico"
-        Title="RPGDiceProgram">
+        Title="RPG Dice Program">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,6 +20,35 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <!--<StackPanel Margin="16">
+        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="Hello world!" />
+    </StackPanel>-->
 
+    <Grid ColumnDefinitions="160,*"
+            RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+            VerticalAlignment="Stretch"
+            RowSpacing="4"
+            Margin="16">
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Greeting}" FontSize="24" FontWeight="Bold" Margin="0 0 0 10" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0">Dice Count</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="False" MaxLines="1">3</TextBox>
+
+        <TextBlock Grid.Row="2" Grid.Column="0">Dice Type</TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="False" MaxLines="1">d12</TextBox>
+
+        <TextBlock Grid.Row="3" Grid.Column="0">Ability Modifier</TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="1">2</TextBox>
+
+        <!-- TODO: DC (Difficulty Class) -->
+
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="20 10" Margin="0 0 0 10">Roll</Button>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            Expression: 3d12 + 2<LineBreak/>
+            Range: 5 - 38
+        </TextBlock>
+    </Grid>
 </Window>

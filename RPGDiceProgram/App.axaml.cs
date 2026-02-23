@@ -7,24 +7,18 @@ using Avalonia.Markup.Xaml;
 using RPGDiceProgram.ViewModels;
 using RPGDiceProgram.Views;
 
-namespace RPGDiceProgram
-{
-    public partial class App : Application
-    {
-        public override void Initialize()
-        {
+namespace RPGDiceProgram {
+    public partial class App : Application {
+        public override void Initialize() {
             AvaloniaXamlLoader.Load(this);
         }
 
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
+        public override void OnFrameworkInitializationCompleted() {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
-                {
+                desktop.MainWindow = new MainWindow {
                     DataContext = new MainWindowViewModel(),
                 };
             }
@@ -32,15 +26,10 @@ namespace RPGDiceProgram
             base.OnFrameworkInitializationCompleted();
         }
 
-        private void DisableAvaloniaDataAnnotationValidation()
-        {
-            // Get an array of plugins to remove
-            var dataValidationPluginsToRemove =
-                BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+        private void DisableAvaloniaDataAnnotationValidation() {
+            DataAnnotationsValidationPlugin[] toRemove = BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
-            // remove each entry found
-            foreach (var plugin in dataValidationPluginsToRemove)
-            {
+            foreach (DataAnnotationsValidationPlugin plugin in toRemove) {
                 BindingPlugins.DataValidators.Remove(plugin);
             }
         }
