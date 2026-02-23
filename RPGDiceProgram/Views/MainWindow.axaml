@@ -3,9 +3,10 @@
         xmlns:vm="using:RPGDiceProgram.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:RPGDiceProgram.Views.ValueConverters"
         mc:Ignorable="d"
         x:Class="RPGDiceProgram.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="vm:MainWindowVM"
         Width="500"
         Height="320"
         FontFamily="Tw Cen MT"
@@ -15,15 +16,12 @@
         Title="RPG Dice Program">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowVM/>
     </Design.DataContext>
 
-    <!--<StackPanel Margin="16">
-        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <TextBlock Text="Hello world!" />
-    </StackPanel>-->
+    <Window.Resources>
+        <converters:RPGDiceTypeStringConverter x:Key="diceTypeConverter" />
+    </Window.Resources>
 
     <Grid ColumnDefinitions="160,*"
             RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
@@ -34,21 +32,33 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Greeting}" FontSize="24" FontWeight="Bold" Margin="0 0 0 10" />
 
         <TextBlock Grid.Row="1" Grid.Column="0">Dice Count</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="False" MaxLines="1">3</TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="False" MaxLines="1" Text="{Binding DiceRoll.DiceCount}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0">Dice Type</TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="False" MaxLines="1">d12</TextBox>
+        <!-- NOTE: This works because it's strictly text-only: -->
+        <!--<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DiceRoll.DiceType, Converter={StaticResource diceTypeConverter}}"/>-->
+
+        <!-- NOTE: This works because the ComboBox sticks to the C# Enum values, but the ComboBox.ItemTemplate only affects the string UI rendering portion without disturbing the underlying ComboBox data. -->
+        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding DiceTypes.AllValues}" SelectedItem="{Binding DiceRoll.DiceType}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource diceTypeConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
 
         <TextBlock Grid.Row="3" Grid.Column="0">Ability Modifier</TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1">2</TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding DiceRoll.AbilityModifier}"/>
 
         <!-- TODO: DC (Difficulty Class) -->
 
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="20 10" Margin="0 0 0 10">Roll</Button>
 
-        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+        <!--<TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
             Expression: 3d12 + 2<LineBreak/>
             Range: 5 - 38
-        </TextBlock>
+        </TextBlock>-->
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="{Binding DiceRoll.DisplayResult}" />
     </Grid>
 </Window>

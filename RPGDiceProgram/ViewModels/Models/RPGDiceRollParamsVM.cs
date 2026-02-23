@@ -1,33 +1,36 @@
-﻿using System.ComponentModel;
-using RPGDiceProgram.Models;
+﻿using RPGDiceProgram.Models;
 
 namespace RPGDiceProgram.ViewModels {
-    public class RPGDiceRollParamsVM : INotifyPropertyChanged {
+    public class RPGDiceRollParamsVM : ViewModelBase {
         private RPGDiceRollParams target;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public int DiceCount {
             get { return target.DiceCount; }
             set {
-                target.DiceCount = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DiceCount)));
+                SetProperty(target.DiceCount, value, v => target.DiceCount = v, nameof(DiceCount));
+                OnPropertyChanged(nameof(DisplayResult));
             }
         }
 
         public RPGDiceType DiceType {
             get { return target.DiceType; }
             set {
-                target.DiceType = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DiceType)));
+                SetProperty(target.DiceType, value, v => target.DiceType = v, nameof(DiceType));
+                OnPropertyChanged(nameof(DisplayResult));
             }
         }
 
         public int AbilityModifier {
             get { return target.AbilityModifier; }
             set {
-                target.AbilityModifier = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AbilityModifier)));
+                SetProperty(target.AbilityModifier, value, v => target.AbilityModifier = v, nameof(AbilityModifier));
+                OnPropertyChanged(nameof(DisplayResult));
+            }
+        }
+
+        public string DisplayResult {
+            get {
+                return DiceCount + DiceType.ToString().ToLower() + " + " + AbilityModifier;
             }
         }
 

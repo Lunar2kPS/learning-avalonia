@@ -19,7 +19,7 @@ namespace RPGDiceProgram {
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
                 desktop.MainWindow = new MainWindow {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowVM(),
                 };
             }
 
