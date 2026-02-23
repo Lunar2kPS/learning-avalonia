@@ -2,7 +2,7 @@
 
 namespace RPGDiceProgram.Models {
     [Serializable]
-    public enum RPGDieType {
+    public enum RPGDiceType {
         D4 = 4,
         D6 = 6,
         D8 = 8,
