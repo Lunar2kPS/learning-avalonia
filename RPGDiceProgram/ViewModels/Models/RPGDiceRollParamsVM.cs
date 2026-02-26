@@ -8,7 +8,8 @@ namespace RPGDiceProgram.ViewModels {
             get { return target.DiceCount; }
             set {
                 SetProperty(target.DiceCount, value, v => target.DiceCount = v, nameof(DiceCount));
-                OnPropertyChanged(nameof(DisplayText));
+                OnPropertyChanged(nameof(DisplayFormulaText));
+                OnPropertyChanged(nameof(DisplayRangeText));
             }
         }
 
@@ -16,7 +17,8 @@ namespace RPGDiceProgram.ViewModels {
             get { return target.DiceType; }
             set {
                 SetProperty(target.DiceType, value, v => target.DiceType = v, nameof(DiceType));
-                OnPropertyChanged(nameof(DisplayText));
+                OnPropertyChanged(nameof(DisplayFormulaText));
+                OnPropertyChanged(nameof(DisplayRangeText));
             }
         }
 
@@ -24,11 +26,13 @@ namespace RPGDiceProgram.ViewModels {
             get { return target.AbilityModifier; }
             set {
                 SetProperty(target.AbilityModifier, value, v => target.AbilityModifier = v, nameof(AbilityModifier));
-                OnPropertyChanged(nameof(DisplayText));
+                OnPropertyChanged(nameof(DisplayFormulaText));
+                OnPropertyChanged(nameof(DisplayRangeText));
             }
         }
 
-        public string DisplayText => target.DisplayText;
+        public string DisplayFormulaText => target.DisplayFormulaText;
+        public string DisplayRangeText => target.DisplayRangeText;
 
         public RPGDiceRollParamsVM(RPGDiceRollParams target) {
             this.target = target;
