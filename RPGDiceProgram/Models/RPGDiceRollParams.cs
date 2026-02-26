@@ -6,6 +6,14 @@ namespace RPGDiceProgram.Models {
         public int DiceCount { get; set; }
         public RPGDiceType DiceType { get; set; }
         public int AbilityModifier { get; set; }
+        public string DisplayText {
+            get {
+                return (DiceCount > 1 ? DiceCount.ToString() : "")
+                    + DiceType.ToString().ToLower() +
+                    (AbilityModifier > 0 ? " + " + AbilityModifier : "") + "\n"
+                    + GetMin() + " - " + GetMax();
+            }
+        }
 
         public int GetMin() => DiceCount + AbilityModifier;
         public int GetMax() {

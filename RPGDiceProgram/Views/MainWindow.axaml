@@ -55,10 +55,6 @@
 
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="20 10" Margin="0 0 0 10">Roll</Button>
 
-        <!--<TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            Expression: 3d12 + 2<LineBreak/>
-            Range: 5 - 38
-        </TextBlock>-->
-        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="{Binding DiceRoll.DisplayResult}" />
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="{Binding DiceRoll.DisplayText}" />
     </Grid>
 </Window>

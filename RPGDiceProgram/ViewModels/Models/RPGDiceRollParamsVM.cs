@@ -8,7 +8,7 @@ namespace RPGDiceProgram.ViewModels {
             get { return target.DiceCount; }
             set {
                 SetProperty(target.DiceCount, value, v => target.DiceCount = v, nameof(DiceCount));
-                OnPropertyChanged(nameof(DisplayResult));
+                OnPropertyChanged(nameof(DisplayText));
             }
         }
 
@@ -16,7 +16,7 @@ namespace RPGDiceProgram.ViewModels {
             get { return target.DiceType; }
             set {
                 SetProperty(target.DiceType, value, v => target.DiceType = v, nameof(DiceType));
-                OnPropertyChanged(nameof(DisplayResult));
+                OnPropertyChanged(nameof(DisplayText));
             }
         }
 
@@ -24,16 +24,11 @@ namespace RPGDiceProgram.ViewModels {
             get { return target.AbilityModifier; }
             set {
                 SetProperty(target.AbilityModifier, value, v => target.AbilityModifier = v, nameof(AbilityModifier));
-                OnPropertyChanged(nameof(DisplayResult));
+                OnPropertyChanged(nameof(DisplayText));
             }
         }
 
-        public string DisplayResult {
-            get {
-                return DiceCount + DiceType.ToString().ToLower() + " + " + AbilityModifier + "\n"
-                    + GetMin() + " - " + GetMax();
-            }
-        }
+        public string DisplayText => target.DisplayText;
 
         public RPGDiceRollParamsVM(RPGDiceRollParams target) {
             this.target = target;
